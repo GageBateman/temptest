@@ -18,25 +18,17 @@ $container = get_theme_mod('understrap_container_type');
 	<!-- ******************* The Footer Full-width Widget Area ******************* -->
 
 	<div class="wrapper" id="wrapper-footer-full">
-
 		<div class="container" id="footer-full-content">
-
-			<div class="row footer-menu">
-
-				<?php dynamic_sidebar('footerfull'); ?>
-
+			<div class="row footer-top">
+				<div class="footer-company-info"><?php dynamic_sidebar('footerlogo') ?></div>
+				<div class="footer-navigation-menus"><?php dynamic_sidebar('footerfull'); ?></div>
 			</div>
-
-			<div class="row footer-logo">
-				<?php dynamic_sidebar('footerlogo') ?>
-			</div>
-
-			<div class="row footer-social-icons">
-				<?php dynamic_sidebar("footersocial") ?>
-			</div>
-
-			<div class="row footer-additional-text">
+			<div class="footer-additional-text">
 				<?php dynamic_sidebar('footertext') ?>
+			</div>
+			<div class="footer-links">
+				<div>© <?php echo do_shortcode('[year]') ?> <?php echo get_option('my_copyright'); ?></div>
+				<?php wp_nav_menu(array('theme_location' => 'footer-links',)); ?>
 			</div>
 
 		</div>
