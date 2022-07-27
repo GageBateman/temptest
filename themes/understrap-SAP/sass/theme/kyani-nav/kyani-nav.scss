@@ -7,7 +7,6 @@
 
 .navigation-header {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
-  padding: 24px 0 0 0;
   background-color: white;
 
   #HeaderNav {
@@ -17,8 +16,10 @@
 	margin: auto;
 	color: $primary;
 
-	@media (max-width: 768px) {
+	@media (max-width: 1200px) {
 	  display: flex;
+	  margin: 20px 0 !important;
+	  padding: 0;
 	  flex-direction: row-reverse;
 	}
 
@@ -616,6 +617,19 @@
 	  display: none;
 	}
   }
+
+  ::-webkit-scrollbar {
+	width: 0;
+	height: 0
+  }
+
+  ::-webkit-scrollbar-thumb {
+	background: transparent
+  }
+
+  ::-webkit-scrollbar-track {
+	background-color: transparent
+  }
 }
   .nav-item {
 	align-self: center;
@@ -630,3 +644,25 @@
 
 	}
   }
+
+#secondary-menu {
+  @media screen and (max-width: 1200px) {
+	overflow-y: hidden;
+	white-space: nowrap;
+	overflow-x: auto;
+	position: relative;
+	-webkit-overflow-scrolling: touch;
+  }
+
+  .nav-link {
+	color: $dark;
+	font-size: 14px;
+	margin: 0 6px;
+
+
+	&:hover {
+	  opacity: 0.9;
+	}
+  }
+}
+
