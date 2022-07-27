@@ -2,7 +2,7 @@
 /**
  * Declaring widgets
  *
- * @package UnderStrap
+ * @package understrap
  */
 
 // Exit if accessed directly.
@@ -17,14 +17,11 @@ defined('ABSPATH') || exit;
 add_filter('dynamic_sidebar_params', 'understrap_widget_classes');
 
 if (!function_exists('understrap_widget_classes')) {
-
 	/**
 	 * Count number of visible widgets in a sidebar and add classes to widgets accordingly,
 	 * so widgets can be displayed one, two, three or four per row.
 	 *
 	 * @param array $params {
-	 *     Parameters passed to a widget’s display callback.
-	 *
 	 * @type array $args {
 	 *         An array of widget display arguments.
 	 *
@@ -49,7 +46,8 @@ if (!function_exists('understrap_widget_classes')) {
 	 * @global array $sidebars_widgets
 	 *
 	 */
-	function understrap_widget_classes($params) {
+	function understrap_widget_classes($params)
+	{
 
 		global $sidebars_widgets;
 
@@ -64,23 +62,7 @@ if (!function_exists('understrap_widget_classes')) {
 			$sidebar_id = $params[0]['id'];
 			$widget_count = count($sidebars_widgets_count[$sidebar_id]);
 
-			$widget_classes = 'widget-count-' . $widget_count;
-			if (0 === $widget_count % 4 || $widget_count > 6) {
-				// Four widgets per row if there are exactly four or more than six widgets.
-				$widget_classes .= ' col-md-3';
-			} elseif (6 === $widget_count) {
-				// If exactly six widgets are published.
-				$widget_classes .= ' col-md-2';
-			} elseif ($widget_count >= 3) {
-				// Three widgets per row if there's three or more widgets.
-				$widget_classes .= ' col-md-4';
-			} elseif (2 === $widget_count) {
-				// If two widgets are published.
-				$widget_classes .= ' col-md-6';
-			} elseif (1 === $widget_count) {
-				// If just on widget is active.
-				$widget_classes .= ' col-md-12';
-			}
+			$widget_classes = 'widget-count-' . $widget_count . ' pt-4';
 
 			// Replace the placeholder class 'dynamic-classes' with the classes stored in $widget_classes.
 			$params[0]['before_widget'] = str_replace('dynamic-classes', $widget_classes, $params[0]['before_widget']);
@@ -89,7 +71,7 @@ if (!function_exists('understrap_widget_classes')) {
 		return $params;
 
 	}
-} // End of if function_exists( 'understrap_widget_classes' ).
+} // endif function_exists( 'understrap_widget_classes' ).
 
 add_action('widgets_init', 'understrap_widgets_init');
 
@@ -97,82 +79,12 @@ if (!function_exists('understrap_widgets_init')) {
 	/**
 	 * Initializes themes widgets.
 	 */
-	function understrap_widgets_init() {
-		register_sidebar(
-			array(
-				'name' => __('Right Sidebar', 'understrap'),
-				'id' => 'right-sidebar',
-				'description' => __('Right sidebar widget area', 'understrap'),
-				'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-				'after_widget' => '</aside>',
-				'before_title' => '<h3 class="widget-title">',
-				'after_title' => '</h3>',
-			)
-		);
+	function understrap_widgets_init()
+	{
 
 		register_sidebar(
 			array(
-				'name' => __('Left Sidebar', 'understrap'),
-				'id' => 'left-sidebar',
-				'description' => __('Left sidebar widget area', 'understrap'),
-				'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-				'after_widget' => '</aside>',
-				'before_title' => '<h3 class="widget-title">',
-				'after_title' => '</h3>',
-			)
-		);
-
-		register_sidebar(
-			array(
-				'name' => __('Hero Slider', 'understrap'),
-				'id' => 'hero',
-				'description' => __('Hero slider area. Place two or more widgets here and they will slide!', 'understrap'),
-				'before_widget' => '<div class="carousel-item">',
-				'after_widget' => '</div>',
-				'before_title' => '',
-				'after_title' => '',
-			)
-		);
-
-		register_sidebar(
-			array(
-				'name' => __('Hero Canvas', 'understrap'),
-				'id' => 'herocanvas',
-				'description' => __('Full size canvas hero area for Bootstrap and other custom HTML markup', 'understrap'),
-				'before_widget' => '',
-				'after_widget' => '',
-				'before_title' => '',
-				'after_title' => '',
-			)
-		);
-
-		register_sidebar(
-			array(
-				'name' => __('Top Full', 'understrap'),
-				'id' => 'statichero',
-				'description' => __('Full top widget with dynamic grid', 'understrap'),
-				'before_widget' => '<div id="%1$s" class="static-hero-widget %2$s dynamic-classes">',
-				'after_widget' => '</div><!-- .static-hero-widget -->',
-				'before_title' => '<h3 class="widget-title">',
-				'after_title' => '</h3>',
-			)
-		);
-
-		register_sidebar(
-			array(
-				'name' => __('Footer Menu', 'understrap'),
-				'id' => 'footerfull',
-				'description' => __('Full sized footer menu widget with dynamic grid', 'understrap'),
-				'before_widget' => '<div id="%1$s" class="footer-widget %2$s dynamic-classes">',
-				'after_widget' => '</div><!-- .footer-widget -->',
-				'before_title' => '<h3 class="widget-title">',
-				'after_title' => '</h3><span class="widget-title-separator"></span>',
-			)
-		);
-
-		register_sidebar(
-			array(
-				'name' => __('Footer Logo', 'understrap'),
+				'name' => __('Footer - Company Info', 'understrap'),
 				'id' => 'footerlogo',
 				'description' => __('Full sized footer area for logo icon', 'understrap'),
 				'before_widget' => '<div id="%1$s" class="footer-widget-logo %2$s dynamic-classes">',
@@ -182,22 +94,25 @@ if (!function_exists('understrap_widgets_init')) {
 
 		register_sidebar(
 			array(
-				'name' => __('Footer Social', 'understrap'),
-				'id' => 'footersocial',
-				'description' => __('Full sized footer area for social media icons', 'understrap'),
-				'before_widget' => '<div id="%1$s" class="footer-widget-social %2$s dynamic-classes">',
-				'after_widget' => '</div>',
+				'name' => __('Footer - Navigation Menus', 'understrap'),
+				'id' => 'footerfull',
+				'description' => __('Full sized footer menu widget with dynamic grid', 'understrap'),
+				'before_widget' => '<div id="%1$s" class="footer-widget %2$s dynamic-classes dropdown">',
+				'after_widget' => '</div></div><!-- .footer-widget -->',
+				'before_title' => '<h3 class="widget-title">',
+				'after_title' => '</h3><div class="dropdown-content">',
 			)
 		);
 
 		register_sidebar(
 			array(
-				'name' => __('Footer Additional Text', 'understrap'),
+				'name' => __('Footer - Disclaimers', 'understrap'),
 				'id' => 'footertext',
-				'description' => __('Full sized footer area for additional text', 'understrap'),
+				'description' => __('Full sized footer area for disclaimers', 'understrap'),
 				'before_widget' => '<div id="%1$s" class="footer-widget-text %2$s dynamic-classes">',
 				'after_widget' => '</div>',
 			)
 		);
+
 	}
-} // End of function_exists( 'understrap_widgets_init' ).
+} // endif function_exists( 'understrap_widgets_init' ).
