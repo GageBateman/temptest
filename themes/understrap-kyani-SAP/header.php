@@ -10,7 +10,8 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-$logoLink = "logo-header.svg";
+//$logoLink = "logo-header.svg";
+$logoLink = "amare-kyani-logo.png";
 if (isset($_SERVER['HTTP_X_KYANI_REP'])) {
 	$rep = explode(';', $_SERVER['HTTP_X_KYANI_REP'])[0];
 	$homeLink = $rep . '.' . $_SERVER['HTTP_HOST'] . get_blog_details(get_current_blog_id())->path;
